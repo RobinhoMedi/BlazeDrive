@@ -10,7 +10,9 @@ public class Policia : MonoBehaviour
         [Header("Particulas")]
         public GameObject ParticulaExplosion;
         public GameObject PoliciaGameObject;
-
+    [Header("PanelPerderPolicia")]
+    public GameObject UIAuto;
+    public GameObject MiniMapa;
     void Update()
     {
         if (movimientoActivado && Objetivo != null)
@@ -68,7 +70,9 @@ public class Policia : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PanelPerder.SetActive(true);
-            Time.timeScale = 0f;
+            UIAuto.SetActive(false);
+            MiniMapa.SetActive(false);
+            //Time.timeScale = 0f;
         }
     }
 

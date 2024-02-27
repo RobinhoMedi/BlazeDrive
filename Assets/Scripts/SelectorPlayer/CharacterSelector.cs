@@ -8,6 +8,8 @@ public class CharacterSelector : MonoBehaviour
     public GameObject AutoDefault;
     public GameObject AutoNormal;
     public GameObject AutoDeportivo;
+    [Header("Botones")]
+    public GameObject UIAuto;
 
     [System.Serializable]
     public struct CharacterData
@@ -86,6 +88,8 @@ public class CharacterSelector : MonoBehaviour
 
     public void SelectCharacter()
     {
+        UIAuto.SetActive(true);
+
         Debug.Log("Personaje seleccionado: " + characters[currentIndex].characterName);
         selectorDePersonajes.SetActive(false);
         Time.timeScale = 1f;

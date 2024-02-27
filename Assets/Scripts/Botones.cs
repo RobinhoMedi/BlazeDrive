@@ -16,18 +16,20 @@ public class Botones : MonoBehaviour
     [Header("Botones")]
     public GameObject BotonConcesionario;
     public GameObject BotonHome;
-
+    public GameObject UIAuto;
     public void EntrarAlConcesionario()
     {
         Auto.SetActive(true);
         CamaraConcesionario.SetActive(true);
         BotonConcesionario.SetActive(false);
+        UIAuto.SetActive(false);
         Time.timeScale = 0f;
     }
 
     public void SalirConcesionario()
     {
         CamaraConcesionario.SetActive(false);
+        UIAuto.SetActive(true);
         Time.timeScale = 1f;
     }
 }
