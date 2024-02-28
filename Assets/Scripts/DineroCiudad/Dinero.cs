@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class Dinero : MonoBehaviour
 {
+    [Header("Animaciones")]
+    public GameObject MarcoMiniMapaNormal;
+    public GameObject MarcoMiniMapaPolicia;
     [Header("Paredes")]
     public GameObject Pared1;
     public GameObject Pared2;
@@ -40,6 +43,10 @@ public class Dinero : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            //Animacion Del Mini Mapa
+            MarcoMiniMapaPolicia.SetActive(true);
+            MarcoMiniMapaNormal.SetActive(false);
+            //Eliminar las estrellas
             NoStars.SetActive(true);
             Instantiate(particulaDinero, transform.position, Quaternion.identity);
 

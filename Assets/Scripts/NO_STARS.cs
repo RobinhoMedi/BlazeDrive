@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class NO_STARS : MonoBehaviour
 {
+    [Header("Animaciones")]
+    public GameObject MarcoMiniMapaNormal;
+    public GameObject MarcoMiniMapaPolicia;
+
     public Text mensajeTexto;
     public float TiempoMostrandoTexto = 3f;
     [Header("Estrellas")]
@@ -14,6 +18,8 @@ public class NO_STARS : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            MarcoMiniMapaNormal.SetActive(true);
+            MarcoMiniMapaPolicia.SetActive(false);
             Policia.SetActive(false);
             Star.SetActive(false);
             Star_1.SetActive(false);
