@@ -5,6 +5,8 @@ using SimpleInputNamespace;
 
 public class Auto : MonoBehaviour
 {
+    [Header("Policia")]
+    public GameObject PoliciaDesactivar;
     [Header("Joystick")]
     public VariableJoystick joystick;
     public SteeringWheel steeringWheel;
@@ -15,7 +17,7 @@ public class Auto : MonoBehaviour
     public AudioSource DerrapeSound;
     public AudioSource Bocina;
     [Header("Particula")]
-    public GameObject ParticulaPoder;
+    public GameObject Poder;
     public GameObject ParticulaDerrape;
     public GameObject ParticulaDerrape1;
     public ParticleSystem Derrape;
@@ -304,11 +306,12 @@ private void ApplyBrake()
         else if(other.gameObject.CompareTag("PoderPlayer"))
         {
             Destroy(GetPoder);
-            ParticulaPoder.SetActive(true);
+            Poder.SetActive(true);
         }
         else if(other.gameObject.CompareTag("Policia"))
         {
-            ParticulaPoder.SetActive(false);
+            PoliciaDesactivar.SetActive(false);
+            Poder.SetActive(false);
         }
     }
     void OnTriggerExit(Collider other)

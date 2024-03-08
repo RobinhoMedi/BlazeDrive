@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lava3D
-  m_Shader: {fileID: 4800000, guid: 2bffc50af4b1ff34cb151aa15bb9edb4, type: 3}
-  m_Parent: {fileID: 2100000, guid: 32a76832b79e84347ad9df08b12709c3, type: 2}
+  m_Name: Brush_Flower
+  m_Shader: {fileID: 4800000, guid: a15eddaf83eb0bb40804b6d17af6f3df, type: 3}
+  m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -24,14 +24,22 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 39a00f3a4d887cc448b5d165b19938eb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0d383f0cd0395064eb4b64619b2840f3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _Cull: 0
-    - _FresnelPower: 3
+    - _Cutoff: 0.25
+    - _Metallic: 0.5
+    - _NormalStrength: 0.25
+    - _Smoothness: 0.5
+    - _Speed: 0.25
     m_Colors:
-    - _Color: {r: 6.4222345, g: 0.6724853, b: 0, a: 1}
-    - _ScrollDirection: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _WindDirection: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
