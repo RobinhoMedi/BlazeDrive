@@ -17,6 +17,7 @@ TagManager:
   - GasStation
   - PoderPlayer
   - CampoDeFuerza
+  - TriggerCiudad
   layers:
   - Default
   - TransparentFX
