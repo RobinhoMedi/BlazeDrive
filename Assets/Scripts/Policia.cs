@@ -80,8 +80,8 @@ public class Policia : MonoBehaviour
     {
         if(other.gameObject.CompareTag("PoderPlayer"))
         {
-            Instantiate(ParticulaExplosion, transform.position, Quaternion.identity);
             PoliciaGameObject.SetActive(false);
+            Instantiate(ParticulaExplosion, transform.position, Quaternion.identity);
         }
     }
     public void DesactivarMovimiento()

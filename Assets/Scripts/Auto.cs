@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using SimpleInputNamespace;
-
+using System.Collections;
 public class Auto : MonoBehaviour
 {
+    [Header("Paneles")]
+    public GameObject Panel_Poder;
+
     [Header("Policia")]
     public GameObject PoliciaDesactivar;
     [Header("Joystick")]
@@ -84,71 +87,70 @@ public class Auto : MonoBehaviour
 
     void Update()
     {
-    if (!isUserInputEnabled)
-    {
-        // Evitar que se realice cualquier entrada del usuario mientras está deshabilitada
-        return;
-    }
-
-    if (Input.GetKeyDown(KeyCode.H))
-    {
-        Bocina.Play();
-    }
-
-    // Reiniciar Posicion Z
-    if (Input.GetKeyDown(KeyCode.R))
-    {
-        ReiniciarRotacionZ();
-        Debug.Log("Pressed R");
-    }
-
-// Obtener la entrada del joystick
-float joystickHorizontalInput = joystick.Horizontal;
-float joystickVerticalInput = joystick.Vertical;
-
-// Obtener la entrada del volante
-float steeringWheelInput = steeringWheel.Value;
-
-// Obtener la entrada del teclado
-float keyboardVerticalInput = Input.GetAxis("Vertical");
-
-// Combinar ambas entradas
-float horizontalInput = Mathf.Clamp(joystickHorizontalInput + steeringWheelInput, -1f, 1f);
-float verticalInput = Mathf.Clamp(joystickVerticalInput + keyboardVerticalInput, -1f, 1f);
-
-
-
-    float translation = 0f;
-    float currentSpeed = isTurboActive ? turboSpeed : (Mathf.Abs(verticalInput) > 0 ? normalSpeed : backwardSpeed);
-
-    // Cambios en la lógica de movimiento
-    if (Mathf.Abs(verticalInput) > 0)
-    {
-        translation = verticalInput * currentSpeed * Time.deltaTime;
-
-        float rotation = 0f;
-
-        // Girar en la dirección adecuada según la marcha (adelante o atrás)
-        if (verticalInput > 0)
+        if (!isUserInputEnabled)
         {
-            rotation = horizontalInput * rotationSpeed * Time.deltaTime;
-        }
-        else if (verticalInput < 0)
-        {
-            rotation = -horizontalInput * rotationSpeed * backwardRotationMultiplier * Time.deltaTime;
+            // Evitar que se realice cualquier entrada del usuario mientras está deshabilitada
+            return;
         }
 
-        transform.Rotate(0, rotation, 0);
-
-        // Aplicar fuerza de derrape para frenar
-        if (!Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            ApplyBrake();
+            Bocina.Play();
         }
-    }
 
-    // Aplicar fuerza de derrape
-    if (Input.GetKey(KeyCode.Space) && Mathf.Abs(verticalInput) > 0)
+        // Reiniciar Posicion Z
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReiniciarRotacionZ();
+            Debug.Log("Pressed R");
+        }
+
+        // Obtener la entrada del joystick
+        float joystickHorizontalInput = joystick.Horizontal;
+        float joystickVerticalInput = joystick.Vertical;
+
+        // Obtener la entrada del volante
+        float steeringWheelInput = steeringWheel.Value;
+
+        // Obtener la entrada del teclado
+        float keyboardVerticalInput = Input.GetAxis("Vertical");
+        float keyboardHorizontalInput = Input.GetAxis("Horizontal"); // Obtener entrada horizontal del teclado
+
+        // Combinar ambas entradas
+        float horizontalInput = Mathf.Clamp(joystickHorizontalInput + steeringWheelInput + keyboardHorizontalInput, -1f, 1f);
+        float verticalInput = Mathf.Clamp(joystickVerticalInput + keyboardVerticalInput, -1f, 1f);
+
+        float translation = 0f;
+        float currentSpeed = isTurboActive ? turboSpeed : (Mathf.Abs(verticalInput) > 0 ? normalSpeed : backwardSpeed);
+
+        // Cambios en la lógica de movimiento
+        if (Mathf.Abs(verticalInput) > 0)
+        {
+            translation = verticalInput * currentSpeed * Time.deltaTime;
+
+            float rotation = 0f;
+
+            // Girar en la dirección adecuada según la marcha (adelante o atrás)
+            if (verticalInput > 0)
+            {
+                rotation = horizontalInput * rotationSpeed * Time.deltaTime;
+            }
+            else if (verticalInput < 0)
+            {
+                rotation = -horizontalInput * rotationSpeed * backwardRotationMultiplier * Time.deltaTime;
+            }
+
+            transform.Rotate(0, rotation, 0);
+
+            // Aplicar fuerza de derrape para frenar
+            if (!Input.GetKey(KeyCode.Space))
+            {
+                ApplyBrake();
+            }
+        }
+
+        // Aplicar fuerza de derrape
+        if (Input.GetKey(KeyCode.Space) && Mathf.Abs(verticalInput) > 0)
     {
         ParticulaDerrape.SetActive(true);
         ParticulaDerrape1.SetActive(true);
@@ -280,9 +282,6 @@ private void ApplyBrake()
 
     private void DeshabilitarEntradaUsuario()
     {
-        // Deshabilitar el script o cualquier componente relacionado con la entrada
-        // Puedes usar un indicador booleano u otro mecanismo para controlar la entrada del usuario.
-        // Por ejemplo, establecer un indicador como: isUserInputEnabled = false;
         isUserInputEnabled = false;
     }
 
@@ -308,6 +307,7 @@ private void ApplyBrake()
             Destroy(GetPoder);
             Poder.SetActive(true);
         }
+
         else if(other.gameObject.CompareTag("Policia"))
         {
             PoliciaDesactivar.SetActive(false);
@@ -320,6 +320,15 @@ private void ApplyBrake()
         {
             BotonConcesionario.SetActive(false);
         }
+    }
+    //Panel Activacion de Poder
+    IEnumerator ActivarDesactivarPanel()
+    {
+        Panel_Poder.SetActive(true); // Activa el panel
+
+        yield return new WaitForSeconds(3f); // Espera 3 segundos
+
+        Poder.SetActive(false); // Desactiva el panel después de 3 segundos
     }
 
     private void ActivateTurbo()

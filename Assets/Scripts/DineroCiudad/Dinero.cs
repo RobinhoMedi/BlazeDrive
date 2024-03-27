@@ -10,8 +10,6 @@ public class Dinero : MonoBehaviour
     [Header("Paredes")]
     public GameObject Pared1;
     public GameObject Pared2;
-    public GameObject Pared3;
-    public GameObject Pared4;
     [Header("SINESTRELLAS")]
     public GameObject NoStars;
     [Header("Texto")]
@@ -89,8 +87,16 @@ public class Dinero : MonoBehaviour
         BotonTurbo.SetActive(true);
         Pared1.SetActive(false);
         Pared2.SetActive(false);
-        Pared3.SetActive(false);
-        Pared4.SetActive(false);
         Debug.Log("Se han recogido 5 monedas. Mostrar panel o realizar acción deseada.");
+
+        // Llamar a la función para desactivar el panel después de 3 segundos
+        Invoke("OcultarPanel", 3f);
     }
+
+    void OcultarPanel()
+    {
+        // Desactivar el GameObject del panel después de 3 segundos
+        panelMonedasRecogidas.SetActive(false);
+    }
+
 }

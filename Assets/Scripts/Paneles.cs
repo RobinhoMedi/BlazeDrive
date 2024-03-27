@@ -6,7 +6,6 @@ public class Paneles : MonoBehaviour
 {
     public GameObject PanelPausa;
     public GameObject MiniMapa;
-    public GameObject UIAUTO;
     public GameObject BotonPausa;
 
 
@@ -14,7 +13,6 @@ public class Paneles : MonoBehaviour
     {
         PanelPausa.SetActive(true);
         MiniMapa.SetActive(false);
-        UIAUTO.SetActive(false);
         BotonPausa.SetActive(false);
         Time.timeScale = 0f;
     }
@@ -22,7 +20,6 @@ public class Paneles : MonoBehaviour
     {
         PanelPausa.SetActive(false);
         MiniMapa.SetActive(true);
-        UIAUTO.SetActive(true);
         BotonPausa.SetActive(true);
         Time.timeScale = 1f;
     }

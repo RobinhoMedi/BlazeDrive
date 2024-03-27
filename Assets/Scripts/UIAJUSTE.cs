@@ -7,7 +7,6 @@ public class UIAJUSTE : MonoBehaviour
     public GameObject PanelPausa;
     public GameObject PanelAjuste;
     public GameObject MiniMapa;
-    public GameObject UIAUTO;
     public GameObject BotonPausa;
 
     public void Ajuste()
@@ -19,7 +18,6 @@ public class UIAJUSTE : MonoBehaviour
     {   
         PanelAjuste.SetActive(false);
         MiniMapa.SetActive(true);
-        UIAUTO.SetActive(true);
         BotonPausa.SetActive(true);
         Time.timeScale = 1f;
     }
